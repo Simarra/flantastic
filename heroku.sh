@@ -1,0 +1,1 @@
+heroku addons:create heroku-postgresql:hobby-dev --version=9.5
