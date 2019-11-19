@@ -15,6 +15,7 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get -y install gdal-bin \
   wget \
   curl \
   python3-venv \
+  netcat \
   # Clean up
   && apt-get autoremove -y \
   && apt-get clean -y
@@ -58,6 +59,8 @@ RUN chmod +x /home/app/web/entrypoint.sh
 RUN chown -R app:app $APP_HOME
 # change to the app user
 USER app
+
+EXPOSE 8000
 
 # run entrypoint.prod.sh
 ENTRYPOINT ["poetry", "run", "/home/app/web/entrypoint.sh"]
