@@ -4,23 +4,10 @@
 #-------------------------------------------------------------------------------------------------------------
 FROM debian:10
 
-# create directory for the app user
-RUN mkdir -p /home/app
-
-# create the app user
-RUN addgroup -S app && adduser -S app -G app
-
-# create the appropriate directories
-ENV HOME=/home/app
-ENV APP_HOME=/home/app/web
-RUN mkdir $APP_HOME
-RUN mkdir $APP_HOME/staticfiles
-RUN mkdir $APP_HOME/mediafiles
-WORKDIR $APP_HOME
 
 
 # Geodjango packages
-RUN apt-get -y install gdal-bin \
+RUN apt-get update -y && apt-get upgrade -y && apt-get -y install gdal-bin \
   python3 \
   python3-dev \
   libgdal-dev \
@@ -37,6 +24,19 @@ RUN apt-get -y install gdal-bin \
 RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py && rm get-pip.py && pip install poetry
 
 
+# create directory for the app user
+RUN mkdir -p /home/app
+
+# create the app user
+RUN addgroup --system app && adduser --system --group app
+
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/web
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
+RUN mkdir $APP_HOME/mediafiles
+WORKDIR $APP_HOME
 # make some useful symlinks that are expected to exist
 RUN cd /usr/bin \
   && { [ -e easy_install ] || ln -s easy_install-* easy_install; } \
@@ -52,6 +52,7 @@ RUN poetry install
 
 # copy entrypoint.sh
 COPY ./entrypoint.sh ${APP_HOME}
+RUN chmod +x /home/app/web/entrypoint.sh
 
 # chown all the files to the app user
 RUN chown -R app:app $APP_HOME
@@ -59,4 +60,4 @@ RUN chown -R app:app $APP_HOME
 USER app
 
 # run entrypoint.prod.sh
-ENTRYPOINT ["/home/app/web/entrypoint.sh"]
+ENTRYPOINT ["poetry", "run", "/home/app/web/entrypoint.sh"]

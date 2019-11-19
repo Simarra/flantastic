@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "app-flantastic"
 packages = [
-    {include = "site"}
+    {include = "mysite"}
 ]
 version = "0.1.1"
 description = "GeoDjango app deployment."
