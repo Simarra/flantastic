@@ -5,7 +5,7 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
-    command: poetry run gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
+    command: poetry run gunicorn mysite.wsgi:application --workers=3 --threads=2 --log-level=critical --bind 0.0.0.0:8000
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
@@ -18,7 +18,7 @@ services:
   db:
     image: mdillon/postgis:11-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data
     env_file:
       - ./.env-db
   nginx:
