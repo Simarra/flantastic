@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'pwa',
     'flantastic',
 ]
 
@@ -106,6 +107,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+
+
+
+
+
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -128,3 +137,55 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 MEDIA_URL = "/mediafiles/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
+
+
+PWA_APP_NAME = 'Flantastic'
+PWA_APP_DESCRIPTION = "My Flantastic App"
+PWA_APP_THEME_COLOR = '#fca23b'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+# PWA_APP_DISPLAY = 'fullscreen'
+# PWA_APP_SCOPE = '/',
+# PWA_APP_ORIENTATION = 'any'
+# PWA_APP_START_URL = '/'
+# PWA_APP_ICONS = [
+# {
+# 'src': '/static/flantastic/images/icons/icon-192x192.png',
+# 'sizes': '192x192'
+# },
+# {
+#         'src': '/static/flantastic/images/icons/icon-72x72.png',
+#         'size': '72x72'
+#     },
+#     {
+#         'src': '/static/flantastic/images/icons/icon-96x96.png',
+#         'size': '96x96'
+#     },
+#     {
+#         'src': '/static/flantastic/images/icons/icon-128x128.png',
+#         'size': '128x128'
+#     },
+#     {
+#         'src': '/static/flantastic/images/icons/icon-144x144.png',
+#         'size': '144x144'
+#     },
+#     {
+#         'src': '/static/flantastic/images/icons/icon-152x152.png',
+#         'size': '152x152'
+#     },
+#     {
+#         'src': '/static/flantastic/images/icons/icon-384x384.png',
+#         'size': '384x384'
+#     },
+#     {
+#         'src': '/static/flantastic/images/icons/icon-512x512.png',
+#         'size': '512x512'
+#     }
+# ]
+# PWA_APP_SPLASH_SCREEN = [
+# {
+# 'src': '/static/flantastic/images/icons/icon-192x192.png',
+# 'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+# }
+# ]
+# PWA_APP_DIR = 'ltr'
+# PWA_APP_LANG = 'fr-FR'
