@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     command: poetry run gunicorn mysite.wsgi:application --workers=3 --threads=2 --log-level=critical --bind 0.0.0.0:8000
     volumes:
-      - static_volume:/home/app/web/staticfiles
+      - static_volume:/home/app/web/static
       - media_volume:/home/app/web/mediafiles
     expose:
       - 8000
@@ -24,7 +24,7 @@ services:
   nginx:
     image: nginx:1.17.5-alpine
     volumes:
-      - static_volume:/home/app/web/staticfiles
+      - static_volume:/home/app/web/static
       - media_volume:/home/app/web/mediafiles
       - ./data/nginx:/etc/nginx/conf.d
       - ./data/certbot/conf:/etc/letsencrypt
