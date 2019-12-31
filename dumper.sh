@@ -1,0 +1,1 @@
+docker-compose -f docker-compose.yml exec web poetry run python manage.py dumpdata >> dump.json
